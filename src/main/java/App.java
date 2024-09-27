@@ -4,17 +4,20 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import entidade.FaturamentoDiario;
+import enums.FaturamentoMensalDistribuidora;
 
 public class App {
     public static void main(String[] args) throws Exception {
         primeiraQuestao();
         segundaQuestao();
         terceiraQuestao();
+        quartaQuestao();
     }
 
     private static void primeiraQuestao() {
@@ -45,9 +48,28 @@ public class App {
         ArrayList<FaturamentoDiario> listaDeFaturamentos = gson.fromJson(reader,
                 new TypeToken<List<FaturamentoDiario>>() {
                 }.getType());
-        System.out.println(" Menor faturamento: R$" + Math.ceil(menorFaturamento(listaDeFaturamentos)) + "\n" +
-                "Maior faturamento: R$ " + Math.ceil(maiorFaturamento(listaDeFaturamentos)) + "\n " +
+        System.out.println("Menor faturamento: R$" + Math.ceil(menorFaturamento(listaDeFaturamentos)) + "\n" +
+                "Maior faturamento: R$ " + Math.ceil(maiorFaturamento(listaDeFaturamentos)) + "\n" +
                 "Número de dias do mês que está acima da média: " + numeroDiasDoMes(listaDeFaturamentos));
+    }
+
+    private static void quartaQuestao() {
+        Double total = Stream.of(FaturamentoMensalDistribuidora.values())
+                .map(FaturamentoMensalDistribuidora::getFaturamento)
+                .reduce((valor1, valor2) -> valor1 + valor2)
+                .orElseThrow(() -> new RuntimeException("Não foi possível executar a soma dos valores"));
+
+                System.out.printf("Percentual de SP: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.SAO_PAULO.getFaturamento(), total));
+                System.out.printf("Percentual de RJ: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.RIO_DE_JANEIRO.getFaturamento(), total));
+                System.out.printf("Percentual de MG: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.MINAS_GERAIS.getFaturamento(), total));
+                System.out.printf("Percentual de ES: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.ESPIRITO_SANTO.getFaturamento(), total));
+                System.out.printf("Percentual de Outros: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.OUTROS.getFaturamento(), total));
+        
+    }
+
+
+    public static Double calcularPercentual(Double valor, Double total) {
+        return (valor / total) * 100;
     }
 
     private static Double menorFaturamento(ArrayList<FaturamentoDiario> lista) {
