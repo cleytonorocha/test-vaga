@@ -15,9 +15,10 @@ import enums.FaturamentoMensalDistribuidora;
 public class App {
     public static void main(String[] args) throws Exception {
         primeiraQuestao();
-        segundaQuestao();
+        // segundaQuestao();
         terceiraQuestao();
         quartaQuestao();
+        quintaQuestao();
     }
 
     private static void primeiraQuestao() {
@@ -65,6 +66,19 @@ public class App {
                 System.out.printf("Percentual de ES: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.ESPIRITO_SANTO.getFaturamento(), total));
                 System.out.printf("Percentual de Outros: %.2f%%\n", calcularPercentual(FaturamentoMensalDistribuidora.OUTROS.getFaturamento(), total));
         
+    }
+
+    private static void quintaQuestao(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite uma string:");
+        String input = scanner.nextLine();
+        scanner.close();
+        char[] caracteres = input.toCharArray();
+        String resultado = "";
+        for (int i = caracteres.length - 1; i >= 0; i--) {
+            resultado += caracteres[i];
+        }
+        System.out.println(resultado);
     }
 
 
