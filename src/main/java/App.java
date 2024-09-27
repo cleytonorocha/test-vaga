@@ -1,3 +1,4 @@
+package main.java;
 import java.util.Scanner;
 
 public class App {
@@ -28,6 +29,8 @@ public class App {
         sc.close();
     }
 
+    private static void terceiraQuestao(){
+    }
     private static boolean isFibonacci(int numero) {
         int a = 0, b = 1, temp;
         while (a < numero) {
@@ -37,4 +40,5 @@ public class App {
         }
         return a == numero;
     }
+
 }
