@@ -15,22 +15,26 @@ import enums.FaturamentoMensalDistribuidora;
 public class App {
     public static void main(String[] args) throws Exception {
         primeiraQuestao();
-        // segundaQuestao();
+        segundaQuestao();
         terceiraQuestao();
         quartaQuestao();
         quintaQuestao();
     }
 
     private static void primeiraQuestao() {
+        System.out.println("1°) ");
+
         int SOMA = 0, K = 0;
         for (int INDICE = 13; K < INDICE;) {
             K = K + 1;
             SOMA = SOMA + K;
         }
-        System.out.println(SOMA);
+        System.out.println("Resultado da soma: " + SOMA);
     }
 
     private static void segundaQuestao() {
+        System.out.println("2°) ");
+
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite um número: ");
         int numero = sc.nextInt();
@@ -40,10 +44,11 @@ public class App {
         } else {
             System.out.println("O número informado não pertence à sequência de Fibonacci.");
         }
-        sc.close();
     }
 
     private static void terceiraQuestao() throws FileNotFoundException {
+        System.out.println("3°) ");
+
         Gson gson = new Gson();
         BufferedReader reader = new BufferedReader(new FileReader("dados.json"));
         ArrayList<FaturamentoDiario> listaDeFaturamentos = gson.fromJson(reader,
@@ -55,6 +60,8 @@ public class App {
     }
 
     private static void quartaQuestao() {
+        System.out.println("4°) ");
+
         Double total = Stream.of(FaturamentoMensalDistribuidora.values())
                 .map(FaturamentoMensalDistribuidora::getFaturamento)
                 .reduce((valor1, valor2) -> valor1 + valor2)
@@ -69,6 +76,8 @@ public class App {
     }
 
     private static void quintaQuestao(){
+        System.out.println("5°) ");
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite uma string:");
         String input = scanner.nextLine();
