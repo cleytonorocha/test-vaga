@@ -15,7 +15,7 @@ import enums.FaturamentoMensalDistribuidora;
 public class App {
     public static void main(String[] args) throws Exception {
         primeiraQuestao();
-        // segundaQuestao();
+        segundaQuestao();
         terceiraQuestao();
         quartaQuestao();
         quintaQuestao();
